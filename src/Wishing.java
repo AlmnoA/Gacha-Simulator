@@ -47,7 +47,7 @@ public class Wishing {
         if (FiveStarRates.currentPity >= FiveStarRates.softPity) {
             FiveStarRates.addSoftPity();
         }
-        if (result <= FiveStarRates.realRate || FiveStarRates.currentPity == FiveStarRates.pity) {
+        if (result <= FiveStarRates.realRate || FiveStarRates.currentPity >= FiveStarRates.pity) {
             FiveStarRates.resetPity();
             if (FiveStarRates.rateUp && !rateUpFiveThings.isEmpty()) {
                 FiveStarRates.rateUp = false;
@@ -58,7 +58,7 @@ public class Wishing {
                 FiveStarRates.rateUp = true;
                 return fiveThings.get(random.nextInt(fiveThings.size()));
             }
-        } else if (result <= FourStarRates.realRate || FourStarRates.currentPity == FourStarRates.pity) {
+        } else if (result <= FourStarRates.realRate || FourStarRates.currentPity >= FourStarRates.pity) {
             FourStarRates.resetPity();
             if (FourStarRates.rateUp && !rateUpFourThings.isEmpty()) {
                 FourStarRates.rateUp = false;
@@ -139,7 +139,7 @@ public class Wishing {
         BufferedWriter writer = new BufferedWriter(new FileWriter("WishingOutcomesList.csv"));
         writer.write("Name,Description,Rarity\n");
         for (thing thing : allOutcomes) {
-            writer.write(thing.toCSV());
+            writer.write(thing.toCSV()+"\n");
         }
         writer.flush();
     }

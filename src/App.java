@@ -7,7 +7,7 @@ import java.io.FileWriter;
 public class App {
 
     public static void main(String[] args) throws Exception {
-        Wishing Wish = new Wishing(new Rates(60, 90, 74, 600), new Rates(510, 10, 10, 0));// honkais rates
+        Wishing Wish = new Wishing(new Rates(60, 90, 74, 600), new Rates(510, 10, 10, 0));// honkais rates about
         Wish.ReadOutcomesFromCSV("WishingOutcomes.csv");
         int i = 0;
         BufferedWriter writer = new BufferedWriter(new FileWriter("result.csv"));
@@ -15,9 +15,10 @@ public class App {
 
         while (true) {
             i++;
+            int a = Wish.FiveStarRates.currentPity;
+            int b = Wish.FourStarRates.currentPity;
             thing aThing = Wish.summonThing();
-            writer.write(aThing.toCSV() + "," + Wish.FiveStarRates.currentPity + "," + Wish.FourStarRates.currentPity
-                    + "\n");
+            writer.write(aThing.toCSV() + "," + a + "," + b + "\n");
             if (i == 10000)
                 break;
         }
