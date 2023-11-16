@@ -19,8 +19,9 @@ public class App {
             int b = Wish.FourStarRates.currentPity;
             thing aThing = Wish.summonThing();
             if (aThing.getRarity() == thing.Rarity.FiveStar || aThing.getRarity() == thing.Rarity.RateUpFiveStar)
-                writer.write(aThing.toCSV() + "," + a + "," + b + "\n");
-                
+                {writer.write(aThing.toCSV() + "," + a + "," + b + "\n");
+        writer.flush();
+            }
             if (i == 100000)
                 break;
         }
