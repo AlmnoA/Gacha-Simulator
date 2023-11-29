@@ -91,7 +91,8 @@ public class Wishing {
         else if(temp[2].equals("4^")) {rare=thing.Rarity.RateUpFourStar;}
         else if(temp[2].equals("5")) {rare=thing.Rarity.FiveStar;}
         else if(temp[2].equals("5^")) {rare=thing.Rarity.RateUpFiveStar;}
-        allOutcomes.add(new thing(rare,temp[0],temp[1]));
+        if(temp[3]!=null)allOutcomes.add(new thing(rare,temp[0],temp[1],temp[3]));
+        else allOutcomes.add(new thing(rare,temp[0],temp[1]));
     }
         SortOutcomes();
     }
@@ -137,7 +138,7 @@ public class Wishing {
     public void exportCSV() throws Exception {
 
         BufferedWriter writer = new BufferedWriter(new FileWriter("WishingOutcomesList.csv"));
-        writer.write("Name,Description,Rarity\n");
+        writer.write("Name,Description,Rarity,Image FilePath\n");
         for (thing thing : allOutcomes) {
             writer.write(thing.toCSV()+"\n");
         }

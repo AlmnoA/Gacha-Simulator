@@ -1,3 +1,9 @@
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 public class thing {
     public enum Rarity {
         ThreeStar,
@@ -10,6 +16,27 @@ public class thing {
     private Rarity rarity;
     private String name;
     private String discription;
+    private BufferedImage image=null;
+    private String imgFilePath=null;
+
+    public boolean loadImage() {
+        try {
+            image = ImageIO.read(new File(imgFilePath));
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public String getImagePath() {
+        return imgFilePath;
+    }
+
+    public void setImage(String imgPath) {
+        imgFilePath = imgPath;
+        loadImage();
+    }
 
     public void setName(String x) {
         name = x;
@@ -47,6 +74,14 @@ public class thing {
         name = Name;
     }
 
+    thing(Rarity rarity1, String Name, String Discription, String imagePath) {
+        rarity = rarity1;
+        discription = Discription;
+        name = Name;
+        imgFilePath = imagePath;
+        loadImage();
+    }
+
     public String toString() {
         String temp = "Name:" + name.toString() + "| Discription:" + discription;
         switch (rarity) {
@@ -69,8 +104,7 @@ public class thing {
                 temp += "Rarity:How the fuck";
                 break;
         }
-
-        return temp;
+        return temp + "| " + imgFilePath;
     }
 
     public String toCSV() {
@@ -95,7 +129,9 @@ public class thing {
                 temp += "How the fuck";
                 break;
         }
-
+        if (imgFilePath != null) {
+            return name + "," + discription + "," + temp + "," + imgFilePath;
+        }
         return name + "," + discription + "," + temp;
     }
 
