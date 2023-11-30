@@ -16,8 +16,8 @@ public class thing {
     private Rarity rarity;
     private String name;
     private String discription;
-    private BufferedImage image=null;
-    private String imgFilePath=null;
+    public BufferedImage image = null;
+    private String imgFilePath = null;
 
     public boolean loadImage() {
         try {
@@ -133,6 +133,24 @@ public class thing {
             return name + "," + discription + "," + temp + "," + imgFilePath;
         }
         return name + "," + discription + "," + temp;
+    }
+
+    public String RaritytoString() {
+        switch (rarity) {
+            case ThreeStar:
+                return "3 Star";
+            case FourStar:
+                return "4 Star";
+            case RateUpFourStar:
+                return "4 Star";
+            case FiveStar:
+                return "5 Star";
+            case RateUpFiveStar:
+                return "5 Star";
+            default:
+                return "Rarity:How the fuck";
+
+        }
     }
 
     public boolean equals(thing thing2) {

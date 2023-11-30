@@ -1,23 +1,16 @@
-
-import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
-
-import javax.naming.spi.DirStateFactory.Result;
 import javax.swing.*;
 
 public class App extends JFrame {
     private JButton onePull;
     private JButton tenPull;
-    private JTextField resultName;
-    private JTextField resultDiscrption;
-    private JLabel resultImage;
+
     public Wishing wish = new Wishing(new Rates(60, 90, 74, 600), new Rates(510, 10, 10, 0));
-    private JButton a;
 
     App() {
         try {
-            // wish.ReadOutcomesFromCSV("WishingOutcomes.csv");
+            wish.ReadOutcomesFromCSV("WishingOutcomes.csv");
         } catch (Exception e) {
             System.out.println("oops\n");
             e.printStackTrace();
@@ -30,15 +23,16 @@ public class App extends JFrame {
             @Override // is this syntax?
             public void actionPerformed(ActionEvent e) {
                 System.out.println("reddt");
-                for (int i = 0; i < 10; i++) {
-                    showResult(wish.summonThing());
-                }
+                
+                showResult(wish.summonThing(), 0);
             }
         });
         tenPull.addActionListener(new ActionListener() {
             @Override // is this syntax?
             public void actionPerformed(ActionEvent e) {
-                System.out.println("\u001B[31m" + "yellow(real)(your color blind)");
+                for (int i = 9; i != 0; i--) {
+                    showResult(wish.summonThing(), i + 1);
+                }
             }
         });
 
@@ -46,16 +40,23 @@ public class App extends JFrame {
         add(tenPull);
 
         setTitle("When the gambling");
-        setSize(300, 400);
+        setSize(600, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new FlowLayout());
         setLocationRelativeTo(null);
         setVisible(true);
     }
 
-    static void showResult(thing aThing) {
+    static void showResult(thing aThing, int number) {
         JFrame john = new JFrame();
-        john.setTitle(aThing.getName());
+        JLabel mary = new JLabel();
+        JTextArea george = new JTextArea(
+                (aThing.RaritytoString() + ": " + aThing.getName() + " " + aThing.getDiscription()));
+        mary.setIcon((new ImageIcon(aThing.image)));
+
+        john.add(george);
+        john.add(mary);
+        john.setTitle(Integer.toString(number) + " " + aThing.getName());
         john.setSize(300, 400);
         john.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         john.setLayout(new FlowLayout());

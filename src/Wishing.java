@@ -91,8 +91,8 @@ public class Wishing {
         else if(temp[2].equals("4^")) {rare=thing.Rarity.RateUpFourStar;}
         else if(temp[2].equals("5")) {rare=thing.Rarity.FiveStar;}
         else if(temp[2].equals("5^")) {rare=thing.Rarity.RateUpFiveStar;}
-        if(temp[3]!=null)allOutcomes.add(new thing(rare,temp[0],temp[1],temp[3]));
-        else allOutcomes.add(new thing(rare,temp[0],temp[1]));
+        allOutcomes.add(new thing(rare,temp[0],temp[1],temp[3]));
+
     }
         SortOutcomes();
     }
