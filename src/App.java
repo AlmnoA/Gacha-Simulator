@@ -2,6 +2,8 @@
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
+
+import javax.naming.spi.DirStateFactory.Result;
 import javax.swing.*;
 
 public class App extends JFrame {
@@ -23,21 +25,23 @@ public class App extends JFrame {
 
         onePull = new JButton("One pull");
         tenPull = new JButton("Ten pull");
-a=new JButton("balls");
+
         onePull.addActionListener(new ActionListener() {
             @Override // is this syntax?
             public void actionPerformed(ActionEvent e) {
                 System.out.println("reddt");
-         a.setText("A");
+                for (int i = 0; i < 10; i++) {
+                    showResult(wish.summonThing());
+                }
             }
         });
         tenPull.addActionListener(new ActionListener() {
             @Override // is this syntax?
             public void actionPerformed(ActionEvent e) {
-                a.setText("b");
+                System.out.println("\u001B[31m" + "yellow(real)(your color blind)");
             }
         });
-        add(a);
+
         add(onePull);
         add(tenPull);
 
@@ -47,6 +51,16 @@ a=new JButton("balls");
         setLayout(new FlowLayout());
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    static void showResult(thing aThing) {
+        JFrame john = new JFrame();
+        john.setTitle(aThing.getName());
+        john.setSize(300, 400);
+        john.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        john.setLayout(new FlowLayout());
+        john.setLocationRelativeTo(null);
+        john.setVisible(true);
     }
 
     public static void main(String[] args) {
